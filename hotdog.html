@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Joe's Hotdogs</title>
+    <style>
+        h1 {
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <h1> Welcome to Joe's Hotdogs!</h1>
+
+    <h2> Your Order: </h2>
+    <p id="Hotdogs"></p>
+    <p id="Fries"></p>
+    <p id="Sodas"></p>
+    <p id="discount"></p>
+    <p id="subtotal"></p>
+    <p id="tax"></p>
+    <p id="total"></p>
+
+    <script>
+        var total = 0;
+        var hotdogs = "Hotdogs";
+        total += order(hotdogs, 3.25);
+
+        var fries = "Fries";
+        total += order(fries, 2.00);
+        var sodas = "Sodas";
+        total += order(sodas, 1.50);
+        if (total >= 20) {
+            document.getElementById("discount").innerHTML = "You qualify for our 10% discount!";
+            total = total * .9;
+        }
+        calc_total(total);
+
+        function order(item, cost) {
+            var food = window.prompt("How many " + item + " would you like?");
+
+            if (food == null || food == "")
+                food = 0;
+            total = food * cost;
+
+            document.getElementById(item).innerHTML = "# of " + item + " ordered: " +
+                food + " at $" + cost.toFixed(2) + " is: $" + total.toFixed(2);
+            return total;
+        }
+
+        function calc_total(total) {
+            document.getElementById("subtotal").innerHTML = "Subtotal: $" + total.toFixed(2);
+
+            var tax = total * .0625;
+            document.getElementById("tax").innerHTML = "Meals Tax: $" + tax.toFixed(2);
+            total += tax;
+            document.getElementById("total").innerHTML = "Total: $" + total.toFixed(2);
+        }
+    </script>
+</body>
+
+</html>
